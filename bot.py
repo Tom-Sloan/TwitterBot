@@ -15,7 +15,6 @@ quotes_user_id = environ['QUOTES_USER_ID']
 
 quotes_token = environ['QUOTES_TOKEN']
 
-
 authors = [
     {
         'first': 'Marcus',
