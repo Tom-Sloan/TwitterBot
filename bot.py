@@ -12,7 +12,6 @@ access_token = environ['ACCESS_TOKEN']
 access_token_secret = environ['ACCESS_TOKEN_SECRET']
 
 quotes_user_id = environ['QUOTES_USER_ID']
-
 quotes_token = environ['QUOTES_TOKEN']
 
 
@@ -72,7 +71,7 @@ def create_tweet():
     return tweet
 
 def tweet_quote():
-    interval = 60*24*24
+    interval = 10
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
     auth.set_access_token(access_token, access_token_secret)
@@ -82,7 +81,9 @@ def tweet_quote():
     # api.update_status(tweet)
 
     while True:
+        print('Getting Tweet')
         tweet = create_tweet()
+        print(tweet)
         api.update_status(tweet)
         time.sleep(interval) 
         
