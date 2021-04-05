@@ -15,6 +15,7 @@ quotes_user_id = environ['QUOTES_USER_ID']
 
 quotes_token = environ['QUOTES_TOKEN']
 
+
 authors = [
     {
         'first': 'Marcus',
@@ -73,18 +74,16 @@ def create_tweet():
 def tweet_quote():
     interval = 60*24*24
 
-    # auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
-    # auth.set_access_token(access_token, access_token_secret)
-    # api = tweepy.API(auth)
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth)
 
     # tweet = create_tweet()
     # api.update_status(tweet)
 
     while True:
-        print('getting a random quote...')        
         tweet = create_tweet()
-        # api.update_status(tweet)
-        print(tweet)
+        api.update_status(tweet)
         time.sleep(interval) 
         
    
