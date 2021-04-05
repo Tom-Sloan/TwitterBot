@@ -57,17 +57,19 @@ def get_random_quote():
     with open('old_quotes.json', 'w', encoding='utf-8') as f:
         json.dump(old_quotes, f, ensure_ascii=False, indent=4)
 
-        # json.dump(random_quote, f, ensure_ascii=False, indent=4)
-
     return random_quote
 
 def create_tweet():
     
-    quote = get_random_quote()
-    tweet = """
-            {}
-            ~{}
-            """.format(quote['quote'], quote['author'])
+    while True:
+        quote = get_random_quote()
+        tweet = """
+                {}
+                ~{}
+                """.format(quote['quote'], quote['author'])
+        if len(tweet)<260:
+            break
+    
     return tweet
 
 def tweet_quote():
@@ -83,8 +85,8 @@ def tweet_quote():
     while True:
         print('Getting Tweet')
         tweet = create_tweet()
-        print(tweet)
         api.update_status(tweet)
+        print(tweet)
         time.sleep(interval) 
         
    
