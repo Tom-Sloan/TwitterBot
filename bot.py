@@ -26,6 +26,7 @@ def get_quotes():
     response = requests.get('https://www.stands4.com/services/v2/quotes.php?uid='+quotes_user_id+'&tokenid='+quotes_token+'&searchtype=AUTHOR&query='+ authors[0]['first']+'+'+authors[0]['last']+'&format=json')
     if response.status_code == 200:
         response = response.json()
+        print(json.dumps(response, indent=4))
         return response['result']
         
     with open('data.json') as f:
@@ -73,7 +74,7 @@ def create_tweet():
     return tweet
 
 def tweet_quote():
-    interval = 10
+    interval = 60*24*60
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
     auth.set_access_token(access_token, access_token_secret)
